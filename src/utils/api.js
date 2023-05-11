@@ -39,9 +39,7 @@ class Api {
     return fetch(`${this._url}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
-      body: JSON.stringify({
-        avatar: formData.link
-      })
+      body: JSON.stringify(formData)
     })
       .then((res) => {
         return this._checkResponse(res);
@@ -62,29 +60,16 @@ class Api {
     return fetch(`${this._url}/cards`, {
       method: "POST",
       headers: this._headers,
-      body: JSON.stringify({
-        name: cardInfo.name,
-        link: cardInfo.link
-      })
+      body: JSON.stringify(cardInfo)
     })
       .then((res) => {
         return this._checkResponse(res);
       });
   }
 
-  setCardLike(cardId) {
+  changeLikeCardStatus(cardId, isLiked) {
     return fetch(`${this._url}/cards/${cardId}/likes`, {
-      method: "PUT",
-      headers: this._headers
-    })
-      .then((res) => {
-        return this._checkResponse(res);
-      });
-  }
-
-  removeCardLike(cardId) {
-    return fetch(`${this._url}/cards/${cardId}/likes`, {
-      method: "DELETE",
+      method: isLiked ? "DELETE" : "PUT",
       headers: this._headers
     })
       .then((res) => {

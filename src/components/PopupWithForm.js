@@ -10,7 +10,7 @@ function PopupWithForm(props) {
           onClick={() => props.onClose()}
         ></button>
         <h2 className="popup__title">{props.title}</h2>
-        <form className="popup__form" name={`${props.name}-form`}>
+        <form className="popup__form" name={`${props.name}-form`} onSubmit={props.onSubmit}>
           {/* Место вставки полей формы */}
           {props.children}
           <button className="popup__save-button" type="submit">{props.buttonText}</button>
